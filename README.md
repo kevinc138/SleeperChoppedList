@@ -1,14 +1,17 @@
 # Sleeper League Analyzer
 
-A Python tool to analyze Sleeper fantasy football leagues and output team rankings by projected points.
+A Python tool to analyze Sleeper fantasy football leagues with a focus on guillotine league risk assessment. Outputs color-coded Excel files and CSV data for strategic decision making.
 
 ## Features
 
-- Fetches league data from Sleeper API
-- Sorts teams by projected points (descending)
-- Tracks starter status (games played vs total starters)
-- Outputs results as CSV spreadsheet
-- Console display with formatted rankings
+- **Real-time Risk Assessment**: Teams sorted by lowest projected points first (most at risk)
+- **Live Game Tracking**: Shows how many starters have played vs total starters
+- **Active Team Filtering**: Automatically excludes eliminated teams (0 projections)
+- **Dual Output Formats**: 
+  - CSV for data analysis
+  - **Styled Excel with color-coded risk levels**
+- **Weekly Projections**: Uses Sleeper's official projection API
+- **Guillotine League Optimized**: Perfect for tracking elimination risk
 
 ## Setup
 
@@ -37,27 +40,36 @@ python sleeper_league_analyzer.py 123456789
 
 ## Output
 
-The tool generates:
-- CSV file: `sleeper_league_{league_id}_week_{week}.csv`
-- Console output with team rankings
+The tool generates two files:
+- **CSV file**: `sleeper_league_{league_id}_week_{week}.csv` - Raw data for analysis
+- **Excel file**: `sleeper_league_{league_id}_week_{week}.xlsx` - **Color-coded risk visualization**
 
-### CSV Columns
+### Excel Color Coding
 
-- **Rank**: Team ranking by projected points
-- **Team Name**: Owner display name or team identifier
-- **Projected Points**: Total projected points for current week
+- 🔴 **Light Red**: Top 2 teams (highest elimination risk)
+- 🟡 **Light Yellow**: Next 3 teams (medium risk)  
+- 🟢 **Light Green**: Remaining teams (lower risk)
+- 🔘 **Gray Headers**: Bold formatting for easy reading
+
+### Output Columns
+
+- **Risk Rank**: Team ranking by elimination risk (1 = most at risk)
+- **Team Name**: Owner display name
+- **Current Points**: Live scoring from games in progress
+- **Projected Points**: Weekly projected points total
 - **Starters Played**: Number of starters whose games have started
 - **Total Starters**: Total number of starting positions filled
 
-## Notes
+## Perfect for Guillotine Leagues
 
-- The "Starters Played" feature is currently a placeholder and needs enhancement to check actual NFL game times
-- Projected points come from Sleeper's current week matchup data
-- Results are sorted in descending order by projected points
+- **Risk-based rankings**: Lowest projected points first
+- **Active teams only**: Eliminated teams automatically filtered out
+- **Visual risk assessment**: Instant color-coded danger zones
+- **Live tracking**: Monitor starter status throughout game day
 
-## Future Enhancements
+## Technical Details
 
-- Real-time game status checking
-- Historical week analysis
-- Additional team statistics
-- Custom formatting options
+- Uses Sleeper's official projection API with proper parameters
+- Real-time starter tracking based on live scoring
+- Automatic column width adjustment in Excel
+- Professional formatting with visual hierarchy
